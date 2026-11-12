@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Power Banks: Past, Present, Future</title>
+<meta name="description" content="An interactive 3D history of the power bank, from 1990s battery boxes to GaN fast chargers and what comes next.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=IBM+Plex+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#15171b;--panel:#1d2026;--ink:#e8eaea;--mute:#98a0a8;--amber:#ffb12b;--cyan:#59d4ff;--line:#2d323b}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 700px at 80% 20%,#242932,var(--bg));color:var(--ink);font:400 17px/1.65 "IBM Plex Sans",system-ui,sans-serif}
+#c{position:fixed;inset:0;width:100%;height:100%;z-index:0}
+main{position:relative;z-index:1}
+section{min-height:100vh;display:flex;align-items:center;padding:12vh 6vw}
+.card{max-width:520px}
+h1,h2{font-family:Unbounded,"Segoe UI",sans-serif;font-weight:700;line-height:1.12;margin:0 0 .5em;letter-spacing:-.01em}
+h1{font-size:clamp(2.2rem,5.4vw,4rem)}
+h2{font-size:clamp(1.5rem,3vw,2.2rem)}
+.year{font-family:Unbounded,sans-serif;font-weight:500;color:var(--amber);font-size:1.05rem;margin:0 0 .6em}
+p{margin:0 0 1em;color:#cfd3d6}
+.facts{list-style:none;padding:0;margin:1.2em 0 0;border-left:2px solid var(--amber)}
+.facts li{padding:.3em 0 .3em 1em;color:var(--ink)}
+.facts b{color:var(--amber);font-weight:500}
+.hint{color:var(--mute);font-size:.9rem}
+.panel{background:rgba(29,32,38,.86);border:1px solid var(--line);border-radius:14px;padding:1.6em;backdrop-filter:blur(8px)}
+.wide{max-width:980px;width:100%}
+.wide.left{margin-right:auto}
+.bars div{display:grid;grid-template-columns:110px 1fr 100px;gap:12px;align-items:center;margin:.55em 0;font-size:.92rem}
+.bars i{display:block;height:12px;border-radius:6px;background:linear-gradient(90deg,var(--amber),#ff7a2b);transform-origin:left;transform:scaleX(0);transition:transform 1.2s cubic-bezier(.2,.8,.2,1)}
+.bars.on i{transform:scaleX(1)}
+.bars.cy i{background:linear-gradient(90deg,var(--cyan),#5a8bff)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:1em}
+.grid .panel{padding:1.1em 1.2em}
+.grid h3{margin:0 0 .3em;font-size:1rem;color:var(--cyan);font-weight:500}
+.grid p{margin:0;font-size:.95rem}
+label{display:block;font-size:.88rem;color:var(--mute);margin-top:.9em}
+input[type=number],input[type=range]{width:100%}
+input[type=number]{background:#12141a;border:1px solid var(--line);border-radius:8px;color:var(--ink);padding:.55em .7em;font:inherit}
+input:focus-visible,a:focus-visible,button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.out{font-family:Unbounded,sans-serif;font-size:2rem;color:var(--amber);margin:.6em 0 0}
+nav{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;gap:1.2em;padding:14px 6vw;font-size:.88rem;background:linear-gradient(#15171bee,#15171b00)}
+nav a{color:var(--mute);text-decoration:none}
+nav a:hover{color:var(--ink)}
+footer{position:relative;z-index:1;padding:4rem 6vw;color:var(--mute);font-size:.85rem}
+@media (max-width:760px){
+ section{align-items:flex-end;padding:10vh 5vw}
+ .card{background:rgba(21,23,27,.82);backdrop-filter:blur(8px);padding:1.3em;border-radius:14px;border:1px solid var(--line)}
+ .bars div{grid-template-columns:80px 1fr 80px}
+ nav{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bars i{transition:none}}
+</style>
+</head>
+<body>
+<canvas id="c" aria-label="3D power bank that changes shape as you scroll through history"></canvas>
+<nav><a href="#top">Start</a><a href="#e0">1991</a><a href="#e1">2009</a><a href="#e2">2015</a><a href="#e3">2020</a><a href="#e4">Future</a><a href="#how">How it works</a><a href="#calc">Calculator</a></nav>
+
+<main>
+<section id="top" data-era="3"><div class="card">
+ <p class="year">A short history of carrying electricity</p>
+ <h1>The power bank, from a box of AA cells to 140 watts.</h1>
+ <p>Scroll down. The 3D power bank beside you rebuilds itself for each era, from the first pocket chargers to the batteries researchers are working on now.</p>
+ <p class="hint">Move your mouse or finger over the page to tilt it.</p>
+</div></section>
+
+<section id="e0" data-era="0"><div class="card">
+ <p class="year">1991 – 2008</p>
+ <h2>Borrowed cells</h2>
+ <p>Sony sold the first commercial lithium-ion cell in 1991. Phones of the 1990s and 2000s had small batteries and long standby times, so a spare charge was a luxury. Early "portable chargers" were plastic cases that held disposable AA batteries and a boost circuit with a single plug.</p>
+ <ul class="facts"><li><b>Capacity:</b> about 1,000–2,500 mAh in practice</li><li><b>Output:</b> 5 V, often well under 1 A</li><li><b>Catch:</b> heavy, slow, and the AA cells ran out</li></ul>
+</div></section>
+
+<section id="e1" data-era="1"><div class="card">
+ <p class="year">2009 – 2014</p>
+ <h2>The 18650 years</h2>
+ <p>Touchscreen smartphones drained in a day. Makers started packing cylindrical 18650 lithium-ion cells (the same size used in laptops) into rechargeable bricks with a USB-A port and a row of LEDs to show charge. Capacities jumped, and the power bank became a common gadget.</p>
+ <ul class="facts"><li><b>Capacity:</b> 5,000–10,000 mAh became normal</li><li><b>Output:</b> 5 V, 1–2 A over USB-A</li><li><b>Catch:</b> cheap packs overstated their mAh</li></ul>
+</div></section>
+
+<section id="e2" data-era="2"><div class="card">
+ <p class="year">2015 – 2019</p>
+ <h2>Slim, fast, and USB-C</h2>
+ <p>Pouch-style lithium-polymer cells made banks thinner, and aluminum shells replaced shiny plastic. Fast-charging standards such as Qualcomm Quick Charge arrived, and USB-C (finalized in 2014) started replacing micro-USB. Big 20,000 mAh packs could now charge a tablet or a light laptop.</p>
+ <ul class="facts"><li><b>Capacity:</b> 10,000 mAh slim, 20,000 mAh large</li><li><b>Output:</b> 18 W fast charging</li><li><b>Catch:</b> many competing fast-charge protocols</li></ul>
+</div></section>
+
+<section id="e3" data-era="3"><div class="card">
+ <p class="year">2020 – today</p>
+ <h2>Power Delivery and GaN</h2>
+ <p>USB Power Delivery became the shared language of chargers. Gallium nitride (GaN) parts run cooler than silicon, so one bank can output 65 W to 140 W and charge a laptop. Digital screens show watts in and out, and Qi2 magnets let a bank snap to the back of a phone and charge it wirelessly.</p>
+ <ul class="facts"><li><b>Capacity:</b> 10,000–27,000 mAh</li><li><b>Output:</b> 30–140 W over USB-C; PD 3.1 allows up to 240 W</li><li><b>Catch:</b> airlines cap carry-ons at 100 Wh, and some now restrict use in flight</li></ul>
+</div></section>
+
+<section id="e4" data-era="4"><div class="card">
+ <p class="year">Next</p>
+ <h2>Beyond lithium: ideas in development</h2>
+ <p>None of this is the mainstream product yet. Researchers and companies are working on cells that hold more energy and are safer, and on bodies that gather a little power themselves.</p>
+ <ul class="facts"><li><b>Solid-state cells:</b> a solid electrolyte instead of liquid, aimed at higher density and less fire risk</li><li><b>Silicon anodes:</b> more lithium storage per gram than graphite</li><li><b>Sodium-ion:</b> cheaper materials, good in cold weather, lower density today</li><li><b>Solar skins and wireless coils:</b> top-ups without a cable, though solar adds only a trickle</li></ul>
+</div></section>
+
+<section id="trend" data-era="3"><div class="wide left panel">
+ <h2>How much has changed</h2>
+ <p class="hint">Typical figures for mainstream models of each period. Individual products vary.</p>
+ <h3 style="font-weight:500;margin:1.2em 0 0;color:var(--amber)">Capacity (mAh)</h3>
+ <div class="bars" id="b1">
+  <div><span>1991–2008</span><i style="--w:.08;width:100%;transform:scaleX(0)" data-w=".08"></i><span>~2,000</span></div>
+  <div><span>2009–2014</span><i data-w=".25"></i><span>~5,000–10,000</span></div>
+  <div><span>2015–2019</span><i data-w=".5"></i><span>~10,000–20,000</span></div>
+  <div><span>2020–today</span><i data-w=".8"></i><span>~20,000+</span></div>
+ </div>
+ <h3 style="font-weight:500;margin:1.2em 0 0;color:var(--cyan)">Output power (W)</h3>
+ <div class="bars cy" id="b2">
+  <div><span>1991–2008</span><i data-w=".03"></i><span>~2.5 W</span></div>
+  <div><span>2009–2014</span><i data-w=".07"></i><span>5–10 W</span></div>
+  <div><span>2015–2019</span><i data-w=".15"></i><span>18–30 W</span></div>
+  <div><span>2020–today</span><i data-w=".7"></i><span>65–140 W</span></div>
+ </div>
+</div></section>
+
+<section id="how" data-era="3"><div class="wide left">
+ <h2>What is inside</h2>
+ <div class="grid">
+  <div class="panel"><h3>Cells</h3><p>Lithium-ion or lithium-polymer cells store the energy. Each cell is about 3.7 V, which is why capacity is quoted at 3.7 V.</p></div>
+  <div class="panel"><h3>Boost converter</h3><p>Raises the cell voltage to the 5 V (or 9, 12, 20 V) that your device asks for. Some energy is lost as heat, so you never get the full rated mAh.</p></div>
+  <div class="panel"><h3>Protection board</h3><p>Stops overcharge, over-discharge, short circuits, and overheating. A pack with no real protection is the one to avoid.</p></div>
+  <div class="panel"><h3>Control chip</h3><p>Talks to your device over USB-C PD to agree on voltage and current, and drives the LEDs or display.</p></div>
+ </div>
+</div></section>
+
+<section id="calc" data-era="3"><div class="wide left panel" style="max-width:520px">
+ <h2>How many charges will I get?</h2>
+ <label for="bank">Power bank capacity (mAh)</label>
+ <input id="bank" type="number" value="10000" min="100" step="100">
+ <label for="phone">Phone battery (mAh)</label>
+ <input id="phone" type="number" value="4500" min="100" step="100">
+ <label for="eff">Real-world efficiency: <span id="effv">70</span>%</label>
+ <input id="eff" type="range" min="50" max="90" value="70">
+ <p class="out" id="res"></p>
+ <p class="hint" id="wh"></p>
+</div></section>
+
+<section id="safe" data-era="4"><div class="wide left">
+ <h2>Buy and use it safely</h2>
+ <div class="grid">
+  <div class="panel"><h3>Check the Wh</h3><p>Wh = mAh × 3.7 ÷ 1000. Most airlines allow up to 100 Wh in carry-on bags, never in checked bags. Check your airline's current rules, since some now limit use during flights.</p></div>
+  <div class="panel"><h3>Buy known brands</h3><p>Look for safety certifications on the label and independent test reviews. Unmarked bargain packs often overstate capacity.</p></div>
+  <div class="panel"><h3>Stop using damaged packs</h3><p>If a bank swells, gets unusually hot, or smells odd, stop using it and take it to a battery recycling point.</p></div>
+  <div class="panel"><h3>Match the wattage</h3><p>A laptop needs a bank that supports USB-C PD at the wattage it asks for, plus a cable rated for it.</p></div>
+ </div>
+</div></section>
+</main>
+<footer>Figures are typical ranges for illustration, not product specifications. Built with Three.js. Single file, ready for GitHub Pages.</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+"use strict";
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+/* era targets: dims, body colour, leds, display, coil, solar, glass */
+var E=[
+ {w:1.5,h:2.5,d:1.0,c:0x8c9199,leds:2,disp:0,coil:0,solar:0,glass:0,txt:["1991–2008","~2,000 mAh"],port:0xcccccc},
+ {w:1.3,h:2.6,d:0.8,c:0x2a4f9e,leds:4,disp:0,coil:0,solar:0,glass:0,txt:["2009–2014","10,000 mAh"],port:0x111111},
+ {w:1.2,h:2.7,d:0.45,c:0x9aa3ad,leds:0,disp:0,coil:0,solar:0,glass:0,txt:["2015–2019","20 W · USB-C"],port:0x0b0b0b},
+ {w:1.3,h:2.7,d:0.55,c:0x20242b,leds:0,disp:1,coil:1,solar:0,glass:0,txt:["2020–","65 W GaN"],port:0x59d4ff},
+ {w:1.35,h:2.7,d:0.5,c:0x3b6f8a,leds:0,disp:1,coil:1,solar:1,glass:1,txt:["Next","solid-state"],port:0xffb12b}
+];
+var cur=JSON.parse(JSON.stringify(E[3])),tgt=3,cr=0x20,txtEra=-1;
+var col=new THREE.Color(E[3].c),tcol=new THREE.Color(E[3].c);
+
+var cv=document.getElementById("c");
+var R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+R.setPixelRatio(Math.min(devicePixelRatio,2));
+var S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(35,1,.1,50);
+cam.position.set(0,0,9);
+S.add(new THREE.AmbientLight(0xffffff,.55));
+var dl=new THREE.DirectionalLight(0xffffff,.9);dl.position.set(3,4,5);S.add(dl);
+var pl=new THREE.PointLight(0xffb12b,.9,20);pl.position.set(-4,-2,3);S.add(pl);
+
+var G=new THREE.Group();S.add(G);
+var bodyMat=new THREE.MeshStandardMaterial({color:E[3].c,metalness:.55,roughness:.35,transparent:true,opacity:1});
+var body=new THREE.Mesh(new THREE.BoxGeometry(1,1,1),bodyMat);G.add(body);
+var edge=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1,1,1)),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.18}));body.add(edge);
+
+var leds=[];
+for(var i=0;i<4;i++){
+ var m=new THREE.Mesh(new THREE.SphereGeometry(.07,16,16),new THREE.MeshBasicMaterial({color:0xffb12b}));
+ G.add(m);leds.push(m);
+}
+var dc=document.createElement("canvas");dc.width=256;dc.height=128;
+var dtex=new THREE.CanvasTexture(dc);
+var disp=new THREE.Mesh(new THREE.PlaneGeometry(.8,.4),new THREE.MeshBasicMaterial({map:dtex}));G.add(disp);
+var port=new THREE.Mesh(new THREE.BoxGeometry(.34,.06,.14),new THREE.MeshStandardMaterial({color:0x111111,emissive:0x000000}));G.add(port);
+var port2=port.clone();port2.material=port.material.clone();G.add(port2);
+var coil=new THREE.Mesh(new THREE.TorusGeometry(.38,.025,12,48),new THREE.MeshBasicMaterial({color:0x59d4ff}));G.add(coil);
+var sc=document.createElement("canvas");sc.width=sc.height=128;
+var sx=sc.getContext("2d");sx.fillStyle="#12285c";sx.fillRect(0,0,128,128);sx.strokeStyle="#7aa6ff";sx.lineWidth=2;
+for(var k=0;k<=128;k+=32){sx.beginPath();sx.moveTo(k,0);sx.lineTo(k,128);sx.moveTo(0,k);sx.lineTo(128,k);sx.stroke();}
+var solar=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(sc)}));G.add(solar);
+
+function drawDisp(i){
+ var x=dc.getContext("2d");x.fillStyle="#0a0c10";x.fillRect(0,0,256,128);
+ x.fillStyle="#59d4ff";x.font="600 26px sans-serif";x.textAlign="center";x.fillText(E[i].txt[0],128,50);
+ x.fillStyle="#ffb12b";x.font="600 30px sans-serif";x.fillText(E[i].txt[1],128,92);
+ dtex.needsUpdate=true;
+}
+drawDisp(3);
+
+function lerp(a,b,t){return a+(b-a)*t}
+function setEra(i){tgt=i}
+var tmp=new THREE.Color();
+function update(dt){
+ var e=E[tgt],k=1-Math.pow(.001,dt);
+ ["w","h","d","leds","disp","coil","solar","glass"].forEach(function(p){cur[p]=lerp(cur[p],e[p],k)});
+ tcol.setHex(e.c);col.lerp(tcol,k);bodyMat.color.copy(col);
+ bodyMat.opacity=lerp(bodyMat.opacity,e.glass?.62:1,k);
+ bodyMat.metalness=lerp(bodyMat.metalness,tgt===0?.05:(tgt===1?.15:.65),k);
+ bodyMat.roughness=lerp(bodyMat.roughness,tgt===0||tgt===1?.55:.28,k);
+ if(txtEra!==tgt&&Math.abs(cur.w-e.w)<.25){txtEra=tgt;drawDisp(tgt)}
+ var w=cur.w,h=cur.h,d=cur.d;
+ body.scale.set(w,h,d);
+ for(var i=0;i<4;i++){
+  var l=leds[i],s=Math.max(0,Math.min(1,cur.leds-i));
+  l.scale.setScalar(s+.0001);l.position.set(-w*.32+i*w*.21,-h*.34,d/2+.02);
+ }
+ disp.scale.setScalar(cur.disp+.0001);disp.position.set(0,-h*.18,d/2+.012);
+ var pc=new THREE.Color(e.port);
+ port.material.color.lerp(pc,k);port.material.emissive.lerp(tgt>=3?pc:new THREE.Color(0),k);
+ port.position.set(-w*.22,h/2,0);
+ port2.position.set(w*.22,h/2,0);
+ port2.material.color.copy(port.material.color);
+ coil.scale.setScalar(cur.coil+.0001);coil.position.set(0,h*.05,-d/2-.012);coil.rotation.y=Math.PI;
+ solar.scale.set(w*.85*(cur.solar+.0001),h*.5*(cur.solar+.0001),1);
+ solar.position.set(0,h*.12,-d/2-.02);solar.rotation.y=Math.PI;
+}
+
+var mx=0,my=0,spin=0;
+addEventListener("pointermove",function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
+function size(){
+ var w=innerWidth,h=innerHeight;R.setSize(w,h,false);cam.aspect=w/h;
+ var wide=w>760;G.position.x=wide?2.0:0;G.position.y=wide?0:1.5;
+ G.scale.setScalar(wide?1:.75);cam.updateProjectionMatrix();
+}
+addEventListener("resize",size);size();
+var last=performance.now();
+function loop(t){
+ var dt=Math.min(.05,(t-last)/1000);last=t;
+ update(dt);
+ if(!reduce)spin+=dt*.35;
+ G.rotation.y=Math.sin(spin)*.9+mx*.8;
+ G.rotation.x=my*.5+.08;
+ G.position.y+=(Math.sin(t/900)*.08-0)*dt*0; 
+ R.render(S,cam);requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+var io=new IntersectionObserver(function(en){
+ en.forEach(function(x){if(x.isIntersecting)setEra(+x.target.dataset.era)});
+},{threshold:.5});
+document.querySelectorAll("section[data-era]").forEach(function(s){io.observe(s)});
+
+var bio=new IntersectionObserver(function(en){
+ en.forEach(function(x){if(x.isIntersecting){
+  x.target.classList.add("on");
+  x.target.querySelectorAll("i").forEach(function(b){b.style.transform="scaleX("+b.dataset.w+")"});
+ }});
+},{threshold:.3});
+["b1","b2"].forEach(function(id){bio.observe(document.getElementById(id))});
+document.querySelectorAll(".bars i").forEach(function(b){b.style.width="100%";b.style.transform="scaleX(0)"});
+
+/* calculator */
+var bank=document.getElementById("bank"),phone=document.getElementById("phone"),eff=document.getElementById("eff");
+function calc(){
+ var b=+bank.value||0,p=+phone.value||1,f=+eff.value/100;
+ document.getElementById("effv").textContent=eff.value;
+ document.getElementById("res").textContent=(b*f/p).toFixed(1)+" full charges";
+ var wh=b*3.7/1000;
+ document.getElementById("wh").textContent=wh.toFixed(1)+" Wh. "+(wh<=100?"Within the common 100 Wh carry-on limit.":"Above the common 100 Wh limit; check your airline.");
+}
+[bank,phone,eff].forEach(function(x){x.addEventListener("input",calc)});calc();
+})();
+</script>
+</body>
+</html>
